@@ -14,38 +14,25 @@ internal abstract class BasePage
 
     protected static readonly string PromptTitle = "Select an [blue]option[/]...";
 
-    private static readonly string DividerLine = "[cyan2]----------------------------------------[/]";
+    private static readonly Rule DividerLine = new Rule().RuleStyle("blueviolet").LeftJustified();
 
     #endregion
     #region Methods - Protected
 
     protected static void WriteFooter()
     {
-        AnsiConsole.Write(new Rule().RuleStyle("grey").LeftJustified());
-        AnsiConsole.Markup($"{Environment.NewLine}Press any [blue]key[/] to continue...");
-        AnsiConsole.Write(new Rule().RuleStyle("grey").RightJustified());
-        AnsiConsole.Write(new Rule().RuleStyle("grey").Centered());
-        AnsiConsole.Write(new Rule().RuleStyle("grey"));
+        AnsiConsole.WriteLine();
+        AnsiConsole.Markup($"Press any [blue]key[/] to continue...");
         Console.ReadKey();
     }
 
     protected static void WriteHeader(string title)
     {
         AnsiConsole.Clear();
-        AnsiConsole.Markup(GetHeaderText(title));
-    }
-
-    #endregion
-    #region Methods - Private
-
-    private static string GetHeaderText(string pageTitle)
-    {
-        var sb = new StringBuilder();
-        sb.AppendLine(DividerLine);
-        sb.AppendLine($"[bold cyan2]{ApplicationTitle}[/]: [honeydew2]{pageTitle}[/]");
-        sb.AppendLine(DividerLine);
-        sb.AppendLine();
-        return sb.ToString();
+        AnsiConsole.Write(DividerLine);
+        AnsiConsole.MarkupLine($"[bold blueviolet]{ApplicationTitle}[/]: [slateblue3]{title}[/]");
+        AnsiConsole.Write(DividerLine);
+        AnsiConsole.WriteLine();
     }
 
     #endregion

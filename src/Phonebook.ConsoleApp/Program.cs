@@ -31,8 +31,8 @@ internal class Program
             // Create the required services.
             var phonebookController = new PhonebookController(databaseContext);
 
-            //var mainMenu = new MainMenuPage();
-            MainMenuPage.Show();
+            var mainMenu = new MainMenuPage(phonebookController);
+            mainMenu.Show();
         }
         catch (Exception exception)
         {
