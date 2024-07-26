@@ -2,6 +2,7 @@
 using Phonebook.ConsoleApp.Enums;
 using Phonebook.ConsoleApp.Extensions;
 using Phonebook.Controllers;
+using Phonebook.Models;
 using Spectre.Console;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -45,7 +46,8 @@ internal class MainMenuPage : BasePage
                 .Title(PromptTitle)
                 .AddChoices(PageChoices.ViewContacts)
                 .AddChoices(PageChoices.CreateContact)
-                .AddChoices(PageChoices.DeleteContact)
+                .AddChoices(PageChoices.UpdateContact)
+                .AddChoices(PageChoices.RemoveContact)
                 .AddChoices(PageChoices.CloseApplication)
                 .UseConverter(c => c.GetDescription())
                 );
@@ -55,8 +57,11 @@ internal class MainMenuPage : BasePage
                 case PageChoices.CreateContact:
                     CreateContact();
                     break;
-                case PageChoices.DeleteContact:
-                    DeleteContact();
+                case PageChoices.RemoveContact:
+                    RemoveContact();
+                    break;
+                case PageChoices.UpdateContact:
+                    UpdateContact();
                     break;
                 case PageChoices.ViewContacts:
                     ViewContacts();
@@ -81,19 +86,40 @@ internal class MainMenuPage : BasePage
         MessagePage.Show("Create Contact", "Contact created successfully");
     }
 
-    private void DeleteContact()
+    private void RemoveContact()
     {
         var contacts = _phonebookController.GetContacts();
 
-        var request = SelectContactPage.Show(contacts);
+        var contact = SelectContactPage.Show(contacts);
+        if (contact == null)
+        {
+            return;
+        }
+
+        _phonebookController.DeleteContact(contact.Id);
+
+        MessagePage.Show("Remove Contact", "Contact removed successfully");
+    }
+
+    private void UpdateContact()
+    {
+        var contacts = _phonebookController.GetContacts();
+
+        var contact = SelectContactPage.Show(contacts);
+        if (contact == null)
+        {
+            return;
+        }
+
+        var request = UpdateContactPage.Show(contact);
         if (request == null)
         {
             return;
         }
 
-        _phonebookController.DeleteContact(request.Id);
+        _phonebookController.SetContact(request.Id, request.Name, request.Email, request.PhoneNumber);
 
-        MessagePage.Show("Delete Contact", "Contact deleted successfully");
+        MessagePage.Show("Update Contact", "Contact updated successfully");
     }
 
     private void ViewContacts()

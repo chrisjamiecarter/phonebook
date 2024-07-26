@@ -15,8 +15,10 @@ internal enum PageChoices
     ClosePage,
     [Description("Create contact")]
     CreateContact,
-    [Description("Delete contact")]
-    DeleteContact,
+    [Description("Remove contact")]
+    RemoveContact,
+    [Description("Update contact")]
+    UpdateContact,
     [Description("View contacts")]
     ViewContacts
 }

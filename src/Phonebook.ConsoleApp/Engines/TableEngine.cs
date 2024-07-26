@@ -11,6 +11,22 @@ internal class TableEngine
 {
     #region Methods
 
+    internal static Table GetContactTable(Contact contact)
+    {
+        var table = new Table
+        {
+            Expand = true,
+        };
+
+        table.AddColumn("Name");
+        table.AddColumn("Email Address");
+        table.AddColumn("Phone Number");
+
+        table.AddRow(contact.Name, contact.Email, contact.PhoneNumber);
+        
+        return table;
+    }
+
     internal static Table GetContactsTable(IReadOnlyList<Contact> data)
     {
         var table = new Table

@@ -19,19 +19,19 @@ internal class CreateContactPage : BasePage
     {
         WriteHeader(PageTitle);
 
-        var name = UserInputService.GetString($"Enter the contact's [blue]name[/], or [blue]0[/] to cancel creating: ");
+        var name = UserInputService.GetString($"Enter the contact's [blue]name[/], or [blue]0[/] to cancel: ");
         if (name == "0")
         {
             return null;
         }
 
-        var email = UserInputService.GetEmailAddress($"Enter the contact's [blue]email address[/], or [blue]0[/] to cancel creating: ");
+        var email = UserInputService.GetEmailAddress($"Enter the contact's [blue]email address[/], or [blue]0[/] to cancel: ");
         if (email == "0")
         {
             return null;
         }
 
-        var phone = UserInputService.GetPhoneNumber($"Enter the contact's [blue]phone number[/], or [blue]0[/] to cancel creating: ");
+        var phone = UserInputService.GetPhoneNumber($"Enter the contact's [blue]phone number[/], or [blue]0[/] to cancel: ");
         if (phone == "0")
         {
             return null;
