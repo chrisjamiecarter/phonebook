@@ -45,6 +45,7 @@ internal class MainMenuPage : BasePage
                 .Title(PromptTitle)
                 .AddChoices(PageChoices.ViewContacts)
                 .AddChoices(PageChoices.CreateContact)
+                .AddChoices(PageChoices.DeleteContact)
                 .AddChoices(PageChoices.CloseApplication)
                 .UseConverter(c => c.GetDescription())
                 );
@@ -53,6 +54,9 @@ internal class MainMenuPage : BasePage
             {
                 case PageChoices.CreateContact:
                     CreateContact();
+                    break;
+                case PageChoices.DeleteContact:
+                    DeleteContact();
                     break;
                 case PageChoices.ViewContacts:
                     ViewContacts();
@@ -75,6 +79,21 @@ internal class MainMenuPage : BasePage
         _phonebookController.AddContact(request.Name, request.Email, request.PhoneNumber);
 
         MessagePage.Show("Create Contact", "Contact created successfully");
+    }
+
+    private void DeleteContact()
+    {
+        var contacts = _phonebookController.GetContacts();
+
+        var request = SelectContactPage.Show(contacts);
+        if (request == null)
+        {
+            return;
+        }
+
+        _phonebookController.DeleteContact(request.Id);
+
+        MessagePage.Show("Delete Contact", "Contact deleted successfully");
     }
 
     private void ViewContacts()
