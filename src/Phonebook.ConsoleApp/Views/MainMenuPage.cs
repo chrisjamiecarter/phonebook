@@ -1,7 +1,9 @@
-﻿using Phonebook.ConsoleApp.Enums;
+﻿using Phonebook.ConsoleApp.Engines;
+using Phonebook.ConsoleApp.Enums;
 using Phonebook.ConsoleApp.Extensions;
 using Phonebook.Controllers;
 using Spectre.Console;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Phonebook.ConsoleApp.Views;
 
@@ -41,6 +43,7 @@ internal class MainMenuPage : BasePage
             choice = AnsiConsole.Prompt(
                 new SelectionPrompt<PageChoices>()
                 .Title(PromptTitle)
+                .AddChoices(PageChoices.ViewContacts)
                 .AddChoices(PageChoices.CreateContact)
                 .AddChoices(PageChoices.CloseApplication)
                 .UseConverter(c => c.GetDescription())
@@ -50,6 +53,9 @@ internal class MainMenuPage : BasePage
             {
                 case PageChoices.CreateContact:
                     CreateContact();
+                    break;
+                case PageChoices.ViewContacts:
+                    ViewContacts();
                     break;
             }
         }
@@ -69,6 +75,13 @@ internal class MainMenuPage : BasePage
         _phonebookController.AddContact(request.Name, request.Email, request.PhoneNumber);
 
         MessagePage.Show("Create Contact", "Contact created successfully");
+    }
+
+    private void ViewContacts()
+    {
+        var data = _phonebookController.GetContacts();
+        var table = TableEngine.GetContactsTable(data);
+        MessagePage.Show("View Contacts", table);
     }
 
     #endregion

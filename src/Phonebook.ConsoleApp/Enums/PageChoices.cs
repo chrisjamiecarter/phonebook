@@ -14,6 +14,8 @@ internal enum PageChoices
     [Description("Close page")]
     ClosePage,
     [Description("Create contact")]
-    CreateContact
+    CreateContact,
+    [Description("View contacts")]
+    ViewContacts
 }
 
