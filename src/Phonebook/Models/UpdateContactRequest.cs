@@ -1,4 +1,6 @@
-﻿namespace Phonebook.Models;
+﻿using Phonebook.Data.Entities;
+
+namespace Phonebook.Models;
 
 public class UpdateContactRequest
 {
@@ -11,6 +13,8 @@ public class UpdateContactRequest
     public string Email { get; set; } = string.Empty;
 
     public string PhoneNumber { get; set; } = string.Empty;
+
+    public Category Category { get; set; } = new Category();
 
     #endregion
 }

@@ -1,10 +1,9 @@
 ﻿using Phonebook.ConsoleApp.Engines;
 using Phonebook.ConsoleApp.Enums;
-using Phonebook.ConsoleApp.Extensions;
+using Phonebook.ConsoleApp.Services;
 using Phonebook.Controllers;
-using Phonebook.Models;
+using Phonebook.Extensions;
 using Spectre.Console;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Phonebook.ConsoleApp.Views;
 
@@ -21,6 +20,15 @@ internal class MainMenuPage : BasePage
     #region Fields
 
     private readonly PhonebookController _phonebookController;
+    
+    private readonly PageChoices[] _pageChoices =
+    [
+        PageChoices.ViewContacts,
+        PageChoices.CreateContact,
+        PageChoices.UpdateContact,
+        PageChoices.RemoveContact,
+        PageChoices.CloseApplication
+    ];
 
     #endregion
     #region Constructors
@@ -40,18 +48,8 @@ internal class MainMenuPage : BasePage
         while (choice != PageChoices.CloseApplication)
         {
             WriteHeader(PageTitle);
-
-            choice = AnsiConsole.Prompt(
-                new SelectionPrompt<PageChoices>()
-                .Title(PromptTitle)
-                .AddChoices(PageChoices.ViewContacts)
-                .AddChoices(PageChoices.CreateContact)
-                .AddChoices(PageChoices.UpdateContact)
-                .AddChoices(PageChoices.RemoveContact)
-                .AddChoices(PageChoices.CloseApplication)
-                .UseConverter(c => c.GetDescription())
-                );
-
+            
+            choice = UserInputService.GetPageChoiceEnum(PromptTitle, _pageChoices);
             switch (choice)
             {
                 case PageChoices.CreateContact:
@@ -75,13 +73,14 @@ internal class MainMenuPage : BasePage
     
     private void CreateContact()
     {
-        var request = CreateContactPage.Show();
+        var categories = _phonebookController.GetCategories();
+        var request = CreateContactPage.Show(categories);
         if (request == null)
         {
             return;
         }
 
-        _phonebookController.AddContact(request.Name, request.Email, request.PhoneNumber);
+        _phonebookController.AddContact(request.Name, request.Email, request.PhoneNumber, request.Category);
 
         MessagePage.Show("Create Contact", "Contact created successfully");
     }
@@ -103,6 +102,7 @@ internal class MainMenuPage : BasePage
 
     private void UpdateContact()
     {
+        var categories = _phonebookController.GetCategories();
         var contacts = _phonebookController.GetContacts();
 
         var contact = SelectContactPage.Show(contacts);
@@ -111,13 +111,13 @@ internal class MainMenuPage : BasePage
             return;
         }
 
-        var request = UpdateContactPage.Show(contact);
+        var request = UpdateContactPage.Show(contact, categories);
         if (request == null)
         {
             return;
         }
 
-        _phonebookController.SetContact(request.Id, request.Name, request.Email, request.PhoneNumber);
+        _phonebookController.SetContact(request.Id, request.Name, request.Email, request.PhoneNumber, request.Category);
 
         MessagePage.Show("Update Contact", "Contact updated successfully");
     }

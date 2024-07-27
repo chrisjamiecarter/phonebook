@@ -1,4 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Phonebook.ConsoleApp.Enums;
+using Phonebook.ConsoleApp.Models;
+using Phonebook.Data.Entities;
+using Phonebook.Extensions;
 using Spectre.Console;
 
 namespace Phonebook.ConsoleApp.Services;
@@ -90,6 +94,36 @@ internal static class UserInputService
                 ? Spectre.Console.ValidationResult.Success()
                 : Spectre.Console.ValidationResult.Error();
             }));
+    }
+
+    internal static Category GetCategory(string prompt, IReadOnlyList<Category> categories)
+    {
+        return AnsiConsole.Prompt(
+                new SelectionPrompt<Category>()
+                .Title(prompt)
+                .AddChoices(categories)
+                .UseConverter(c => c.Name)
+                );
+    }
+
+    internal static PageChoice GetPageChoice(string prompt, IEnumerable<PageChoice> choices)
+    {
+        return AnsiConsole.Prompt(
+                new SelectionPrompt<PageChoice>()
+                .Title(prompt)
+                .AddChoices(choices)
+                .UseConverter(c => c.Name)
+                );
+    }
+
+    internal static PageChoices GetPageChoiceEnum(string prompt, IEnumerable<PageChoices> choices)
+    {
+        return AnsiConsole.Prompt(
+                new SelectionPrompt<PageChoices>()
+                .Title(prompt)
+                .AddChoices(choices)
+                .UseConverter(c => c.GetDescription())
+                );
     }
 
     #endregion

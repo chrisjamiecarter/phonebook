@@ -21,8 +21,9 @@ internal class TableEngine
         table.AddColumn("Name");
         table.AddColumn("Email Address");
         table.AddColumn("Phone Number");
+        table.AddColumn("Category");
 
-        table.AddRow(contact.Name, contact.Email, contact.PhoneNumber);
+        table.AddRow(contact.Name, contact.Email, contact.PhoneNumber, contact.Category.Name);
         
         return table;
     }
@@ -39,10 +40,11 @@ internal class TableEngine
         table.AddColumn("Name");
         table.AddColumn("Email Address");
         table.AddColumn("Phone Number");
-        
+        table.AddColumn("Category");
+
         foreach (var x in data)
         {
-            table.AddRow(x.Id.ToString(), x.Name, x.Email, x.PhoneNumber);
+            table.AddRow(x.Id.ToString(), x.Name, x.Email, x.PhoneNumber, x.Category.Name);
         }
 
         return table;

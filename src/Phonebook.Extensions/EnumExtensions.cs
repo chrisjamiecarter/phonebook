@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Phonebook.ConsoleApp.Extensions;
+namespace Phonebook.Extensions;
 
 /// <summary>
 /// System.Enum class extension methods.

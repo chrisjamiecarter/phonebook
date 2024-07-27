@@ -1,4 +1,5 @@
 ﻿using Phonebook.ConsoleApp.Services;
+using Phonebook.Data.Entities;
 using Phonebook.Models;
 
 namespace Phonebook.ConsoleApp.Views;
@@ -15,7 +16,7 @@ internal class CreateContactPage : BasePage
     #endregion
     #region Methods - Internal
 
-    internal static CreateContactRequest? Show()
+    internal static CreateContactRequest? Show(IReadOnlyList<Category> categories)
     {
         WriteHeader(PageTitle);
 
@@ -37,11 +38,18 @@ internal class CreateContactPage : BasePage
             return null;
         }
 
+        var category = UserInputService.GetCategory($"Select a [blue]category[/] for the contact: ", categories);
+        if (category is null)
+        {
+            return null;
+        }
+
         return new CreateContactRequest
         {
             Name = name,
             Email = email,
-            PhoneNumber = phone
+            PhoneNumber = phone,
+            Category = category
         };
     }
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Specialized;
 
-namespace Phonebook.ConsoleApp.Extensions;
+namespace Phonebook.Extensions;
 
 /// <summary>
 /// System.Collections.Specialized.NameValueCollection class extension methods.

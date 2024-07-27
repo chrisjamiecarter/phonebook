@@ -19,7 +19,7 @@ internal class UpdateContactPage : BasePage
     #endregion
     #region Methods - Internal
 
-    internal static UpdateContactRequest? Show(Contact contact)
+    internal static UpdateContactRequest? Show(Contact contact, IReadOnlyList<Category> categories)
     {
         WriteHeader(PageTitle);
 
@@ -46,12 +46,19 @@ internal class UpdateContactPage : BasePage
             return null;
         }
 
+        var category = UserInputService.GetCategory($"Select a [blue]category[/] for the contact: ", categories);
+        if (category is null)
+        {
+            return null;
+        }
+
         return new UpdateContactRequest
         {
             Id = contact.Id,
             Name = name,
             Email = email,
-            PhoneNumber = phone
+            PhoneNumber = phone,
+            Category = category
         };
     }
 

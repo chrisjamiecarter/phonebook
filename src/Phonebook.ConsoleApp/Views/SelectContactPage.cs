@@ -1,7 +1,9 @@
 ﻿using Phonebook.ConsoleApp.Enums;
-using Phonebook.ConsoleApp.Extensions;
+using Phonebook.Extensions;
 using Phonebook.Data.Entities;
 using Spectre.Console;
+using Phonebook.ConsoleApp.Models;
+using Phonebook.ConsoleApp.Services;
 
 namespace Phonebook.ConsoleApp.Views;
 
@@ -27,28 +29,22 @@ internal class SelectContactPage : BasePage
 
         var option = GetOption(contacts);
 
-        return option == 0 ? null : contacts.First(x => x.Id == option);
+        return option.Id == 0 ? null : contacts.First(x => x.Id == option.Id);
     }
 
     #endregion
     #region Methods - Private
 
-    private static int GetOption(IReadOnlyList<Contact> contacts)
+    private static PageChoice GetOption(IReadOnlyList<Contact> contacts)
     {
-        // Concatenates contacts (as an ID, Name KVP) with a "Close page" choice.
-        IEnumerable<KeyValuePair<int, string>> pageChoices = 
+        // Concatenates contacts (as an ID, Name KVP) with a "0, Close page" choice.
+        IEnumerable<PageChoice> pageChoices = 
         [
-            .. contacts.Select(x => new KeyValuePair<int, string>(x.Id, x.Name)), 
-            new KeyValuePair<int, string>(0, PageChoices.ClosePage.GetDescription()) 
+            .. contacts.Select(x => new PageChoice { Id = x.Id, Name = x.Name }), 
+            new PageChoice { Id = 0, Name = PageChoices.ClosePage.GetDescription() }
         ];
 
-        return AnsiConsole.Prompt(
-                new SelectionPrompt<KeyValuePair<int, string>>()
-                .Title(PromptTitle)
-                .EnableSearch()
-                .AddChoices(pageChoices)
-                .UseConverter(c => c.Value)
-                ).Key;
+        return UserInputService.GetPageChoice(PromptTitle, pageChoices);
     }
 
     #endregion

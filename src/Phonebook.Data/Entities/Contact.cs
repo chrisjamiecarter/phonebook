@@ -19,5 +19,9 @@ public class Contact
     [Phone]
     public string PhoneNumber { get; set; } = string.Empty;
 
+    public int CategoryId { get; set; }
+
+    public Category Category { get; set; }
+
     #endregion
 }

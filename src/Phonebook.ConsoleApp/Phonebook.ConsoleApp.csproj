@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Phonebook.Data\Phonebook.Data.csproj" />
+    <ProjectReference Include="..\Phonebook.Extensions\Phonebook.Extensions.csproj" />
     <ProjectReference Include="..\Phonebook\Phonebook.csproj" />
   </ItemGroup>
 
