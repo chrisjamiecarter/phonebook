@@ -39,8 +39,11 @@ This is a .NET project designed to demonstrate using the Entity Framework ORM an
 ## Getting Started
 
 **IMPORTANT!** 
-Ensure you read this section carefully and perform the create database migration step!
+
+I have already created and staged the InitialCreate database migration in the repo.
+
 Entity Framework will handle the database creation for you.
+
 The console application will handle the performing of any created database migrations.
 
 ### Prerequisites
