@@ -1,9 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace Phonebook.Data.Entities;
 
+/// <summary>
+/// Database version of the Category object.
+/// </summary>
 [Index(nameof(Name), IsUnique = true)]
 public class Category
 {

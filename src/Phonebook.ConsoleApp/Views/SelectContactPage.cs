@@ -1,9 +1,9 @@
 ﻿using Phonebook.ConsoleApp.Enums;
-using Phonebook.Extensions;
-using Phonebook.Data.Entities;
-using Spectre.Console;
 using Phonebook.ConsoleApp.Models;
 using Phonebook.ConsoleApp.Services;
+using Phonebook.Data.Entities;
+using Phonebook.Extensions;
+using Spectre.Console;
 
 namespace Phonebook.ConsoleApp.Views;
 
@@ -19,10 +19,6 @@ internal class SelectContactPage : BasePage
     #endregion
     #region Methods - Internal
 
-    /// <summary>
-    /// Gets a list of categories from the drinks controller displays for user selection.
-    /// </summary>
-    /// <returns>The name of the category selected, or null if user wants to close the page.</returns>
     internal static Contact? Show(IReadOnlyList<Contact> contacts)
     {
         WriteHeader(PageTitle);
@@ -38,9 +34,9 @@ internal class SelectContactPage : BasePage
     private static PageChoice GetOption(IReadOnlyList<Contact> contacts)
     {
         // Concatenates contacts (as an ID, Name KVP) with a "0, Close page" choice.
-        IEnumerable<PageChoice> pageChoices = 
+        IEnumerable<PageChoice> pageChoices =
         [
-            .. contacts.Select(x => new PageChoice { Id = x.Id, Name = x.Name }), 
+            .. contacts.Select(x => new PageChoice { Id = x.Id, Name = x.Name }),
             new PageChoice { Id = 0, Name = PageChoices.ClosePage.GetDescription() }
         ];
 
