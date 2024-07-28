@@ -1,9 +1,10 @@
-﻿using Phonebook.Data.Contexts;
-using Phonebook.Data.Entities;
-using Phonebook.Data.Services;
+﻿using Phonebook.Data.Entities;
 
 namespace Phonebook.Controllers;
 
+/// <summary>
+/// Partial class for Category specific model-database methods.
+/// </summary>
 public partial class PhonebookController
 {
     #region Methods

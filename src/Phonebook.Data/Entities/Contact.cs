@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Phonebook.Data.Entities;
 
+/// <summary>
+/// Database version of the Contact object.
+/// </summary>
 public class Contact
 {
     #region Properties

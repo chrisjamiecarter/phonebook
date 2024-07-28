@@ -3,6 +3,9 @@ using Phonebook.Data.Entities;
 
 namespace Phonebook.Data.Services;
 
+/// <summary>
+/// Partial class for Category entity specific database methods.
+/// </summary>
 public partial class PhonebookService
 {
     #region Methods

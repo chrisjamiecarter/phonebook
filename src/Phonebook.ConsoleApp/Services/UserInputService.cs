@@ -15,7 +15,7 @@ internal static class UserInputService
     #region Constants
 
     private readonly static string EmailValidationErrorMessage = "[red]Invalid email address![/] Expected format: [blue]user@domain.tld[/]";
-    
+
     private readonly static string PhoneValidationErrorMessage = "[red]Invalid phone number[/] Expected format: [blue]01234567890[/]";
 
     #endregion

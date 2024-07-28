@@ -1,12 +1,14 @@
 ﻿using System.Configuration;
-using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
 using Phonebook.Data.Entities;
 using Phonebook.Extensions;
 
 namespace Phonebook.Data.Contexts;
 
-public class DatabaseContext : DbContext
+/// <summary>
+/// The context for an SQL Server database.
+/// </summary>
+public class SqlDatabaseContext : DbContext
 {
     #region Properties
 

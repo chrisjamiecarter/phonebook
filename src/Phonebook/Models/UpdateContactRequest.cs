@@ -2,6 +2,9 @@
 
 namespace Phonebook.Models;
 
+/// <summary>
+/// Class to hold required values for updating a contact.
+/// </summary>
 public class UpdateContactRequest
 {
     #region Properties

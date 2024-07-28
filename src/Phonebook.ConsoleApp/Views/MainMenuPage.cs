@@ -2,8 +2,6 @@
 using Phonebook.ConsoleApp.Enums;
 using Phonebook.ConsoleApp.Services;
 using Phonebook.Controllers;
-using Phonebook.Extensions;
-using Spectre.Console;
 
 namespace Phonebook.ConsoleApp.Views;
 
@@ -20,7 +18,7 @@ internal class MainMenuPage : BasePage
     #region Fields
 
     private readonly PhonebookController _phonebookController;
-    
+
     private readonly PageChoices[] _pageChoices =
     [
         PageChoices.ViewContacts,
@@ -48,7 +46,7 @@ internal class MainMenuPage : BasePage
         while (choice != PageChoices.CloseApplication)
         {
             WriteHeader(PageTitle);
-            
+
             choice = UserInputService.GetPageChoiceEnum(PromptTitle, _pageChoices);
             switch (choice)
             {
@@ -70,7 +68,7 @@ internal class MainMenuPage : BasePage
 
     #endregion
     #region Methods - Private
-    
+
     private void CreateContact()
     {
         var categories = _phonebookController.GetCategories();

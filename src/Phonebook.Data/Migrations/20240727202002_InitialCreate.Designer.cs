@@ -10,7 +10,7 @@ using Phonebook.Data.Contexts;
 
 namespace Phonebook.Data.Migrations
 {
-    [DbContext(typeof(DatabaseContext))]
+    [DbContext(typeof(SqlDatabaseContext))]
     [Migration("20240727202002_InitialCreate")]
     partial class InitialCreate
     {

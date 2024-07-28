@@ -17,7 +17,7 @@ internal class Program
         try
         {
             // Create the SQL Server database context.
-            var databaseContext = new DatabaseContext();
+            var databaseContext = new SqlDatabaseContext();
 
             // Ensure database is created and any database migrations are performed.
             // NOTE: this does not generate migrations. It only actions them.
@@ -40,7 +40,7 @@ internal class Program
         }
     }
 
-    private static void InitialiseDatabase(DatabaseContext databaseContext)
+    private static void InitialiseDatabase(SqlDatabaseContext databaseContext)
     {
         AnsiConsole.Status()
             .Spinner(Spinner.Known.Aesthetic)

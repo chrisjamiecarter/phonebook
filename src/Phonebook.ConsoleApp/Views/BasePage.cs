@@ -1,5 +1,4 @@
-﻿using System.Text;
-using Spectre.Console;
+﻿using Spectre.Console;
 
 namespace Phonebook.ConsoleApp.Views;
 

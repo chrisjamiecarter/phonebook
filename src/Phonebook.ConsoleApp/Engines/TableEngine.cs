@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Phonebook.Data.Entities;
+﻿using Phonebook.Data.Entities;
 using Spectre.Console;
 
 namespace Phonebook.ConsoleApp.Engines;
@@ -24,7 +23,7 @@ internal class TableEngine
         table.AddColumn("Category");
 
         table.AddRow(contact.Name, contact.Email, contact.PhoneNumber, contact.Category.Name);
-        
+
         return table;
     }
 
@@ -35,7 +34,7 @@ internal class TableEngine
             Caption = new TableTitle($"{data.Count} contacts found."),
             Expand = true,
         };
-        
+
         table.AddColumn("ID");
         table.AddColumn("Name");
         table.AddColumn("Email Address");

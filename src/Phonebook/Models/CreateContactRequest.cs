@@ -2,6 +2,9 @@
 
 namespace Phonebook.Models;
 
+/// <summary>
+/// Class to hold required values for creating a contact.
+/// </summary>
 public class CreateContactRequest
 {
     #region Properties

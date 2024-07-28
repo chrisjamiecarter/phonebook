@@ -1,9 +1,10 @@
-﻿using Phonebook.Data.Contexts;
-using Phonebook.Data.Entities;
-using Phonebook.Data.Services;
+﻿using Phonebook.Data.Entities;
 
 namespace Phonebook.Controllers;
 
+/// <summary>
+/// Partial class for Contact specific model-database methods.
+/// </summary>
 public partial class PhonebookController
 {
     #region Methods
@@ -15,7 +16,7 @@ public partial class PhonebookController
             Name = name,
             Email = email,
             PhoneNumber = phoneNumber,
-            Category = category            
+            Category = category
         };
 
         return _service.AddContact(contact);
